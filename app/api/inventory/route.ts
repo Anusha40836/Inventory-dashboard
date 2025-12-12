@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     inventory.push(item);
     return NextResponse.json({ data: item });
   } catch (err) {
-    if (err instanceof z.ZodError) return NextResponse.json({ error: err.errors }, { status: 400 });
+    if (err instanceof z.ZodError) return NextResponse.json({ error: err.issues }, { status: 400 });
     return NextResponse.json({ error: "Unknown error" }, { status: 500 });
   }
 }
@@ -32,7 +32,7 @@ export async function PUT(req: NextRequest) {
     inventory = inventory.map((i) => (i.id === item.id ? item : i));
     return NextResponse.json({ data: item });
   } catch (err) {
-    if (err instanceof z.ZodError) return NextResponse.json({ error: err.errors }, { status: 400 });
+    if (err instanceof z.ZodError) return NextResponse.json({ error: err.issues }, { status: 400 });
     return NextResponse.json({ error: "Unknown error" }, { status: 500 });
   }
 }
